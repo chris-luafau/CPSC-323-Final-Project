@@ -23,91 +23,276 @@ private:
 	// 11 -> A
 	// 12 -> show ( J ) ;
 	// 13 -> J = E ;
-	// 14 -> TQ
-	// 15 -> +TQ
-	// 16 -> -TQ
-	// 17 -> FR
-	// 18 -> *FR
-	// 19 -> /FR
-	// 20 -> ( E )
-	// 21 -> N
-	// 22 -> J
-	// 23 -> S D M
-	// 24 -> D M
-	// 25 -> +
-	// 26 -> -
-	// 27 -> 0
-	// 28 -> 1
-	// 29 -> 2
-	// 30 -> 3
-	// 31 -> 4
-	// 32 -> 5
-	// 33 -> 6
-	// 34 -> 7
-	// 35 -> 8
-	// 36 -> 9
-	// 37 -> a
-	// 38 -> b
-	// 39 -> c
-	// 40 -> d
-	// 41 -> e
-	//   P   V   B   E   I   S   ,   :   ;   =   (   )   +   -   *   /   C   a   b   c   d   e
-	int parsing_table[22][22] = {
-		01, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,   // P
-		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 02, 02, 02, 02, 02,   // J
-		-1, -1, -1, -1, -1, -1, 00, 00, 00, 00, -1, 00, 00, 00, 00, 00, 03, 02, 02, 02, 02, 02,   // K
-		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 04, 04, 04, 04, 04,   // V
-		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 05, 05, 05, 05, 05,   // U	
-		-1, -1, -1, -1, -1, -1, 06, 00, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,   // B
-		-1, -1, -1, -1, 07, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,   // X
-		-1, -1, -1, -1, -1,  8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  8,  8,  8,  8,  8,   // Y
-		-1, -1, -1, 00, -1,  9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  9,  9,  9,  9,  9,   // H
-		-1, -1, -1, -1, -1, 10, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 11, 11, 11, 11, 11,   // Z
-		-1, -1, -1, -1, -1, 12, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,   // W
-		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 13, 13, 13, 13, 13,   // A
-		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 14, -1, 14, 14, -1, -1, 14, 14, 14, 14, 14, 14,   // E
-		-1, -1, -1, -1, -1, -1, -1, -1, 00, -1, -1, 00, 15, 16, -1, -1, -1, -1, -1, -1, -1, -1,   // Q
-		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 17, -1, 17, 17, -1, -1, 17, 17, 17, 17, 17, 17,   // T
-		-1, -1, -1, -1, -1, -1, -1, -1, 00, -1, -1, 00, 00, 00, 18, 19, -1, -1, -1, -1, -1, -1,   // R
-		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 20, -1, 21, 21, -1, -1, 21, 22, 22, 22, 22, 22,   // F
-		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 23, 23, -1, -1, -1, -1, -1, -1, -1, -1,   // N
-		-1, -1, -1, -1, -1, -1, -1, -1, 00, -1, -1, 00, 00, 00, 00, 00, 24, -1, -1, -1, -1, -1,   // M
-		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 25, 26, -1, -1, 00, -1, -1, -1, -1, -1,   // S
-		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 27, -1, -1, -1, -1, -1,   // D
-		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 37, 38, 39, 40, 41 }; // L
+// 14 -> TQ
+// 15 -> +TQ
+// 16 -> -TQ
+// 17 -> FR
+// 18 -> *FR
+// 19 -> /FR
+// 20 -> ( E )
+// 21 -> N
+// 22 -> J
+// 23 -> S D M
+// 24 -> D M
+// 25 -> +
+// 26 -> -
+// 27 -> 0
+// 28 -> 1
+// 29 -> 2
+// 30 -> 3
+// 31 -> 4
+// 32 -> 5
+// 33 -> 6
+// 34 -> 7
+// 35 -> 8
+// 36 -> 9
+// 37 -> a
+// 38 -> b
+// 39 -> c
+// 40 -> d
+// 41 -> e
+////   P   V   B   E   I   S   ,   :   ;   =   (   )   +   -   *   /   C   a   b   c   d   e
+//int parsing_table[22][22] = {
+//	01, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,   // P
+//	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 02, 02, 02, 02, 02,   // J
+//	-1, -1, -1, -1, -1, -1, 00, 00, 00, 00, -1, 00, 00, 00, 00, 00, 03, 02, 02, 02, 02, 02,   // K
+//	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 04, 04, 04, 04, 04,   // V
+//	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 05, 05, 05, 05, 05,   // U	
+//	-1, -1, -1, -1, -1, -1, 06, 00, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,   // B
+//	-1, -1, -1, -1, 07, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,   // X
+//	-1, -1, -1, -1, -1,  8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  8,  8,  8,  8,  8,   // Y
+//	-1, -1, -1, 00, -1,  9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  9,  9,  9,  9,  9,   // H
+//	-1, -1, -1, -1, -1, 10, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 11, 11, 11, 11, 11,   // Z
+//	-1, -1, -1, -1, -1, 12, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,   // W
+//	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 13, 13, 13, 13, 13,   // A
+//	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 14, -1, 14, 14, -1, -1, 14, 14, 14, 14, 14, 14,   // E
+//	-1, -1, -1, -1, -1, -1, -1, -1, 00, -1, -1, 00, 15, 16, -1, -1, -1, -1, -1, -1, -1, -1,   // Q
+//	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 17, -1, 17, 17, -1, -1, 17, 17, 17, 17, 17, 17,   // T
+//	-1, -1, -1, -1, -1, -1, -1, -1, 00, -1, -1, 00, 00, 00, 18, 19, -1, -1, -1, -1, -1, -1,   // R
+//	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 20, -1, 21, 21, -1, -1, 21, 22, 22, 22, 22, 22,   // F
+//	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 23, 23, -1, -1, -1, -1, -1, -1, -1, -1,   // N
+//	-1, -1, -1, -1, -1, -1, -1, -1, 00, -1, -1, 00, 00, 00, 00, 00, 24, -1, -1, -1, -1, -1,   // M
+//	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 25, 26, -1, -1, 00, -1, -1, -1, -1, -1,   // S
+//	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 27, -1, -1, -1, -1, -1,   // D
+//	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 37, 38, 39, 40, 41 }; // L
+
+//   P   V   B   E   I   S   ,   :   ;   =   (   )   +   -   *   /   C   a   b   c   d   e
+int parsing_table[22][22] = {
+	01, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,   // P
+	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 02, 02, 02, 02, 02,   // J
+	-1, -1, -1, -1, -1, -1, 00, 00, 00, 00, -1, 00, 00, 00, 00, 00, 03, 02, 02, 02, 02, 02,   // K
+	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 04, 04, 04, 04, 04,   // V
+	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 05, 05, 05, 05, 05,   // U	
+	-1, -1, -1, -1, -1, -1, 06, 00, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,   // B
+	-1, -1, -1, -1, 07, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,   // X
+	-1, -1, -1, -1, -1,  8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  8,  8,  8,  8,  8,   // Y
+	-1, -1, -1, 00, -1,  9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  9,  9,  9,  9,  9,   // H
+	-1, -1, -1, -1, -1, 10, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 11, 11, 11, 11, 11,   // Z
+	-1, -1, -1, -1, -1, 12, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,   // W
+	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 13, 13, 13, 13, 13,   // A
+	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 14, -1, 14, 14, -1, -1, 14, 14, 14, 14, 14, 14,   // E
+	-1, -1, -1, -1, -1, -1, -1, -1, 00, -1, -1, 00, 15, 16, -1, -1, -1, -1, -1, -1, -1, -1,   // Q
+	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 17, -1, 17, 17, -1, -1, 17, 17, 17, 17, 17, 17,   // T
+	-1, -1, -1, -1, -1, -1, -1, -1, 00, -1, -1, 00, 00, 00, 18, 19, -1, -1, -1, -1, -1, -1,   // R
+	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 20, -1, 21, 21, -1, -1, 21, 22, 22, 22, 22, 22,   // F
+	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 23, 23, -1, -1, -1, -1, -1, -1, -1, -1,   // N
+	-1, -1, -1, -1, -1, -1, -1, -1, 00, -1, -1, 00, 00, 00, 00, 00, 24, -1, -1, -1, -1, -1,   // M
+	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 25, 26, -1, -1, 00, -1, -1, -1, -1, -1,   // S
+	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 27, -1, -1, -1, -1, -1,   // D
+	-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 37, 38, 39, 40, 41 }; // L
 
 
 
-	vector <string>* stack;																	// used to keep of states still need to be processed
-	map <string, int> m = { { "P", 0 },{ "J", 1 },{ "K", 2 },{ "V", 3 },{ "U", 4 },{ "B", 5 },{ "X", 6 },{ "Y", 7 },{ "H", 8 },{ "Z", 9 },{ "W", 10 },{ "A", 11 },{ "E", 12 },{ "Q", 13 },{ "T", 14 },{ "R", 15 },{ "F", 16 },{ "N", 17 },{ "M", 18 },{ "S", 19 },{ "D", 20 },{ "L", 21 },		// Maps states to indexes in parsing table above
-	{ "program", 0 },{ "var", 1 },{ "begin", 2 },{ "end", 3 },{ "integer", 4 },{ "show", 5 },
-	{ ",", 6 },{ ":", 7 },{ ";", 8 },{ "=", 9 },{ "(", 10 },{ ")", 11 },{ "+", 12 },{ "-", 13 },{ "*", 14 },{ "/", 15 },
-	{ "C", 16 },
-	{ "a", 17 },{ "b", 18 },{ "c", 19 },{ "d", 20 },{ "e", 21 } };
+vector <string>* stack;																	// used to keep of states still need to be processed
+map <string, int> m = { { "P", 0 },{ "J", 1 },{ "K", 2 },{ "V", 3 },{ "U", 4 },{ "B", 5 },{ "X", 6 },{ "Y", 7 },{ "H", 8 },{ "Z", 9 },{ "W", 10 },{ "A", 11 },{ "E", 12 },{ "Q", 13 },{ "T", 14 },{ "R", 15 },{ "F", 16 },{ "N", 17 },{ "M", 18 },{ "S", 19 },{ "D", 20 },{ "L", 21 },		// Maps states to indexes in parsing table above
+{ "program", 0 },{ "var", 1 },{ "begin", 2 },{ "end", 3 },{ "integer", 4 },{ "show", 5 },
+{ ",", 6 },{ ":", 7 },{ ";", 8 },{ "=", 9 },{ "(", 10 },{ ")", 11 },{ "+", 12 },{ "-", 13 },{ "*", 14 },{ "/", 15 },
+{ "C", 16 },
+{ "a", 17 },{ "b", 18 },{ "c", 19 },{ "d", 20 },{ "e", 21 } };
 
 public:
 	bool parse(string filename);
+	bool error_check(string input_text);
+	bool reserved_words_check(vector<string> tokens);
+	bool comma_check(vector<string> tokens);
+	bool parenthesis_check(vector<string> tokens);
+	bool semicolons_check(string input_text);
+	bool undefined_var_check(vector<string> tokens);
 };
+
+bool Language::reserved_words_check(vector<string> tokens) {
+	std::vector<std::string> reserved{ "program", "var", "integer", "show", "begin", "end" };
+	for (auto& key : reserved) {
+		if ((find(tokens.begin(), tokens.end(), key)) == tokens.end()) {
+			std::cout << key + " is expected.";
+			return false;
+		}
+	}
+	return true;
+}
+
+bool Language::comma_check(vector<string> tokens) {
+	int var_index = 0;
+	int integer_index = 0;
+
+	for (int i = 0; i < tokens.size(); ++i) {
+		if (tokens[i] == "var") {
+			var_index = i;
+			break;
+		}
+	}
+	for (int i = 0; i < tokens.size(); ++i) {
+		if (tokens[i] == "integer") {
+			integer_index = i;
+			break;
+		}
+	}
+
+	for (int i = var_index+1; i < integer_index-1; ++i) {
+		string curr_word = tokens[i];
+		string next_word = tokens[i + 1];
+		if ((curr_word != ",") && (curr_word != ":")) {
+			if ((next_word != ",") && (next_word != ":")) {
+				std::cout << ", is missing";
+				return false;
+			}
+			else
+				i += 1;
+		}
+	}
+
+	return true;
+}
+
+bool Language::parenthesis_check(vector<string> tokens) {
+	vector<string> st;
+	for (auto& t : tokens) {
+		if (t == "(")
+			st.push_back(t);
+		else if (t == ")") {
+			if (st.empty() || (st.back() != "(")) {
+				cout << "( is missing";
+				return false;
+			}
+			else
+				st.pop_back();
+		}
+	}
+	if (!st.empty()) {
+		cout << ") is missing";
+		return false;
+	}
+	return true;
+}
+
+bool Language::semicolons_check(string input_text) {
+	istringstream lines(input_text);
+	string line;
+	while (getline(lines, line)) {
+		istringstream words(line);
+		string word;
+		vector<string> curr_line;
+		while (words >> word) {
+			curr_line.push_back(word);
+		}
+		if (curr_line[0] != "var" && curr_line[0] != "begin" && curr_line[0] != "end") {
+			if (curr_line.back() != ";") {
+				std::cout << "; is missing";
+				return false;
+			}
+			else
+				continue;
+		}
+	}
+	return true;
+}
+
+bool Language::undefined_var_check(vector<string> tokens) {
+	int var_index = 0;
+	int integer_index = 0;
+	int begin_index = 0;
+
+	for (int i = 0; i < tokens.size(); ++i) {
+		if (tokens[i] == "var") {
+			var_index = i;
+			break;
+		}
+	}
+	for (int i = 0; i < tokens.size(); ++i) {
+		if (tokens[i] == "integer") {
+			integer_index = i;
+			break;
+		}
+	}
+	for (int i = 0; i < tokens.size(); ++i) {
+		if (tokens[i] == "begin") {
+			begin_index = i;
+			break;
+		}
+	}
+	vector<string> variables;
+	for (int j = var_index + 1; j < integer_index - 1; ++j) {
+		if (tokens[j] != "," && tokens[j] != ":")
+			variables.push_back(tokens[j]);
+	}
+
+	vector<string> chars{ "a","b","c","d","e" };
+	vector<string> reserved{ "program", "var", "integer", "show", "begin", "end" };
+
+	vector<string> valid_input;
+	valid_input.reserve(variables.size() + chars.size() + reserved.size());
+	valid_input.insert(std::end(valid_input), std::begin(variables), std::end(variables));
+	valid_input.insert(std::end(valid_input), std::begin(chars), std::end(chars));
+	valid_input.insert(std::end(valid_input), std::begin(reserved), std::end(reserved));
+
+	for (int i = begin_index; i < tokens.size(); ++i) {
+		string curr_word = tokens[i];
+		if (find(valid_input.begin(), valid_input.end(), curr_word) == valid_input.end() && 
+			!(isdigit(curr_word[0])) && !(ispunct(curr_word[0]))) {
+			std::cout << "undefined identifier " + curr_word;
+			return false;
+		}
+	}
+
+	return true;
+}
+
+
+bool Language::error_check(string input_text) {
+	vector<string> tokens;
+	istringstream lines(input_text);
+	string line;
+	while (getline(lines, line)) {
+		istringstream words(line);
+		string word;
+		while (words >> word) {
+			tokens.push_back(word);
+		}
+	}
+	bool c = (reserved_words_check(tokens) && comma_check(tokens) && parenthesis_check(tokens) && semicolons_check(input_text) && undefined_var_check(tokens));
+	return c;
+}
+
 
 bool Language::parse(string filename) {
 	string state;				// Current State
 	string check = "\0";		// If state is terminal, checks if it matches char being read
 	int parseId;			    // Used for parsing table to figure out what to push
 	std::vector<std::string> reserved{ "program", "var", "integer", "show", "begin", "end" };
-
-
 	stack = new vector<string>;
-
-	// Initial states to push
-	//stack->push_back("end");
-	//std::cout << "push end\n";
-	stack->push_back("P");
-	std::cout << "push P\n";
 
 	ifstream in_file(filename);
 	string input_text;
 
 	getline(in_file, input_text, '\0');
+
+	if (!error_check(input_text))
+		return false;
+
+	// Initial states to push
+	stack->push_back("P");
+	std::cout << "push P\n";
+
 
 	istringstream lines(input_text);
 	string line;
@@ -138,8 +323,8 @@ bool Language::parse(string filename) {
 				}
 				std::cout << endl;
 
-				if (curr_word.empty())
-					break;
+				//if (curr_word.empty())
+				//	break;
 
 				// Pop State
 				state = stack->back();
@@ -157,10 +342,15 @@ bool Language::parse(string filename) {
 				vector<char> chars{ 'a','b','c','d','e' };
 				if ((isdigit(c) || c == ',' || c == ':' || c == ';' || c == '=' ||
 					c == '(' || c == ')' || c == '+' || c == '*' || c == '/' || 
-					find(chars.begin(), chars.end(), c) != chars.end()) && c == curr_word[0])
+					find(chars.begin(), chars.end(), c) != chars.end()) /*&& c == curr_word[0]*/)
 				{
 					// read from string
-					curr_word.erase(0, 1);
+					if (c == curr_word[0])
+						curr_word.erase(0, 1);
+					//else {
+					//	std::cout << c << " was expected";
+					//	return false;
+					//}
 				}
 
 				// If state is non-terminal
@@ -179,6 +369,7 @@ bool Language::parse(string filename) {
 						tmp = string(1, curr_word[0]);
 						if (!isdigit(tmp[0])) {
 							y = m.find(string(1, curr_word[0]))->second;
+							//y = m.find("G")->second;
 						}
 						else
 							y = m.find("C")->second;
@@ -191,19 +382,27 @@ bool Language::parse(string filename) {
 					switch (parseId) {
 					case -1:
 						// -1 means reject word
-
-						// Not working for every case
-						//if (state == "P")
-						//	std::cout << "program is expected.";
-						//else if (state == "V")
-						//	std::cout << "var is expected.";
-						//else if (state == "Y" && curr_word == "=")
-						//	std::cout << "begin is expected.";
-						//else if (state == "X")
-						//	std::cout << "integer is expected or misspelled.";
-						//else if (state == "H")
-						//	std::cout << "show is expected or misspelled.";
-						//else
+						// cases not handled yet: 
+						// missing operators (+ - * /)
+						// missing operands i.e. x = 1 * ;
+						if (state == "P")
+							std::cout << "program is expected.";
+						else if (state == "V")
+							std::cout << "var is expected.";
+						else if (state == "K") {
+							if (curr_word == "integer")
+								std::cout << ": is missing";
+						}
+						else if (state == "Y" && curr_word == "=")
+							std::cout << "begin is expected.";
+						else if (state == "X")
+							std::cout << "integer is expected or misspelled.";
+						else if (state == "H" && curr_word == "(")
+							std::cout << "show is expected or misspelled.";
+						else if ((state == "H" && curr_word == "=") || (state == "E" && curr_word == ";") || 
+							(state == "J" && curr_word == ";"))
+							std::cout << "invalid expression";
+						else
 							std::cout << "Unable to find a match\n";
 						return false;
 					case 0:										// 0 means lambda, continue and pop next state
@@ -355,35 +554,28 @@ bool Language::parse(string filename) {
 							temp.push_back(curr_word[i]);
 							i += 1;
 						}
-						//while (i > 0)
-						//	curr_word.erase(0, 1);
 						stack->push_back(temp);
 						std::cout << "push " << temp << "\n";
 						break;
 					case 37:
 						stack->push_back("a");
 						std::cout << "push a\n";
-						//curr_word.erase(0, 1);
 						break;
 					case 38:
 						stack->push_back("b");
 						std::cout << "push b\n";
-						//curr_word.erase(0, 1);
 						break;
 					case 39:
 						stack->push_back("c");
 						std::cout << "push c\n";
-						//curr_word.erase(0, 1);
 						break;
 					case 40:
 						stack->push_back("d");
 						std::cout << "push d\n";
-						//curr_word.erase(0, 1);
 						break;
 					case 41:
 						stack->push_back("e");
 						std::cout << "push e\n";
-						//curr_word.erase(0, 1);
 						break;
 					default:
 						break;
